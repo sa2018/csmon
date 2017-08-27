@@ -21,4 +21,5 @@ ratings:
 exclude_paths:
 - tests/
 - .venv/
-- .cache
+- .cache/
+- build/
