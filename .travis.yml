@@ -15,4 +15,4 @@ after_success:
   - CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN codeclimate-test-reporter
   - "curl -o /tmp/travis-automerge https://raw.githubusercontent.com/cdown/travis-automerge/master/travis-automerge"
   - "chmod a+x /tmp/travis-automerge"
-  - "BRANCHES_TO_MERGE_REGEX='^development/' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=cdown/srt /tmp/travis-automerge"
+  - "BRANCHES_TO_MERGE_REGEX='^development/' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=sa2018/csmon /tmp/travis-automerge"
