@@ -17,8 +17,8 @@ class Config(object):
         'LOG_MON_FILE': './csmon-monitor.log',
         'LOG_MON_LEVEL': logging.INFO,
         'LOG_MON_TZ_FORMAT': '%s',
-        'LOG_MON_FORMAT': '%(asctime)s,%(status_check)s,%(url)s,'
-                          '%(response_time_ms)s',
+        'LOG_MON_FORMAT': '%(finished_ts)s,%(status_check)s,%(url)s,'
+                          '%(response_time_ms)s,%(retry_count)s',
     }
 
     @staticmethod
@@ -32,9 +32,6 @@ class Config(object):
     def set(name, value):
 
         Config.__not_found(name)
-
-        Validation.instance(value, type(Config.__configs[name]), False)
-
         Config.__configs[name] = value
 
         return value
@@ -44,3 +41,4 @@ class Config(object):
 
         if name not in Config.__configs.keys():
             raise NameError('%s configuration parameter not found' % name)
+
