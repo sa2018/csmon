@@ -2,3 +2,4 @@ codeclimate-test-reporter==0.2.3
 pytest-cov==2.5.1
 coverage==4.3
 
+testfixtures==5.1.1
