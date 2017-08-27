@@ -13,4 +13,4 @@ script:
   - coverage run -m csmon.cli
 
 after_success:
-  - CODECLIMATE_REPO_TOKEN=a8ca0741806cc58417861626c816bfa223508d9b codeclimate-test-reporter
+  - CODECLIMATE_REPO_TOKEN=5c7dbe2c9715eab293d17b3a3dd65709f24b0e9330aee8505ef0d6e96dfa8756 codeclimate-test-reporter
