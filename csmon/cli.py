@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from argparse import ArgumentParser, RawTextHelpFormatter
 from utils.validation import Validation
 from utils.config import Config
