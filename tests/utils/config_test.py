@@ -3,7 +3,7 @@ import unittest
 from csmon.utils.config import Config
 
 
-class ConfigValidation(unittest.TestCase):
+class TestConfig(unittest.TestCase):
 
     def test_set(self):
         value = Config.set('CHECK_INTERVAL',50)
