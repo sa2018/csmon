@@ -34,7 +34,7 @@ class Validation(object):
 
     @staticmethod
     def is_number(value):
-        return Validation.__is(value,complex)
+        return Validation.__is(value, complex)
 
     @staticmethod
     def is_integer(value):
