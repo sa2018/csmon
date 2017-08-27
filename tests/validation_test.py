@@ -2,11 +2,10 @@
 import unittest
 from csmon.utils.validation import Validation
 from argparse import ArgumentTypeError
-import tempfile
 import os
 
-class TestValidation(unittest.TestCase):
 
+class TestValidation(unittest.TestCase):
     def setUp(self):
         self.files = []
 
@@ -15,15 +14,13 @@ class TestValidation(unittest.TestCase):
             os.unlink(filename)
 
     def test_instance(self):
-
         with self.assertRaises(TypeError):
-            Validation.instance("A",list,True)
+            Validation.instance("A", list, True)
 
-        self.assertFalse(Validation.instance("A",list,False))
-        self.assertTrue(Validation.instance([],list,False))
+        self.assertFalse(Validation.instance("A", list, False))
+        self.assertTrue(Validation.instance([], list, False))
 
     def test___argtype_check(self):
-
         with self.assertRaises(ArgumentTypeError):
             Validation._Validation__argtype_check(
                 value=10,
@@ -31,9 +28,9 @@ class TestValidation(unittest.TestCase):
                 error="Error")
 
         result = Validation._Validation__argtype_check(
-                value=10,
-                validators=[lambda x: True],
-                error="Error")
+            value=10,
+            validators=[lambda x: True],
+            error="Error")
 
         self.assertTrue(result)
 
@@ -52,17 +49,17 @@ class TestValidation(unittest.TestCase):
         self.files.append(file_name)
 
         os.chmod(file_name, 0444)
-        self.assertTrue(Validation._Validation__file_(file_name,os.R_OK))
+        self.assertTrue(Validation._Validation__file_(file_name, os.R_OK))
 
         os.chmod(file_name, 0222)
-        self.assertTrue(Validation._Validation__file_(file_name,os.W_OK))
+        self.assertTrue(Validation._Validation__file_(file_name, os.W_OK))
 
         # Exists not doable
         os.chmod(file_name, 0444)
-        self.assertFalse(Validation._Validation__file_(file_name,os.W_OK))
+        self.assertFalse(Validation._Validation__file_(file_name, os.W_OK))
 
         os.chmod(file_name, 0222)
-        self.assertFalse(Validation._Validation__file_(file_name,os.R_OK))
+        self.assertFalse(Validation._Validation__file_(file_name, os.R_OK))
 
     def test_file_not_empty(self):
         file_name = '.UNIT_TEST_EMPTY'
@@ -107,9 +104,7 @@ class TestValidation(unittest.TestCase):
         with self.assertRaises(TypeError):
             Validation.file_read(None)
 
-
     def test_file_write(self):
-
         file_name = '.UNIT_TEST_WRITE'
         open(file_name, 'a').close()
         self.files.append(file_name)
@@ -123,7 +118,6 @@ class TestValidation(unittest.TestCase):
         with self.assertRaises(TypeError):
             Validation.file_write(None)
 
-
     def test_argtype_file_exists_and_not_empty(self):
         file_name = '.UNIT_TEST_ARG_NEMPTY'
         a = open(file_name, 'a')
@@ -132,16 +126,64 @@ class TestValidation(unittest.TestCase):
         self.files.append(file_name)
 
         self.assertEqual(file_name,
-                         Validation.argtype_file_exists_and_not_empty(file_name))
+                         Validation.argtype_file_exists_and_not_empty(
+                             file_name))
 
         open(file_name, 'w').close()
         with self.assertRaises(ArgumentTypeError):
-                Validation.argtype_file_exists_and_not_empty(file_name)
+            Validation.argtype_file_exists_and_not_empty(file_name)
 
         with self.assertRaises(TypeError):
             Validation.argtype_file_exists_and_not_empty(None)
 
+    def test_is_number(self):
+        self.assertTrue(Validation.is_number(1))
+        self.assertTrue(Validation.is_number("100"))
+        self.assertTrue(Validation.is_number(10.00))
+        self.assertTrue(Validation.is_number(-1))
+        self.assertTrue(Validation.is_number("100.05"))
+        self.assertFalse(Validation.is_number("ABC"))
+        self.assertFalse(Validation.is_number("100,05"))
+
+    def test_is_integer(self):
+        self.assertTrue(Validation.is_integer(1))
+        self.assertFalse(Validation.is_integer("10.5"))
+
+    def test_is_unsigned(self):
+        self.assertTrue(Validation.is_unsigned(0.01))
+        self.assertTrue(Validation.is_unsigned(1))
+        self.assertTrue(Validation.is_unsigned(0.00))
+        self.assertFalse(Validation.is_unsigned(-0.01))
+        self.assertFalse(Validation.is_unsigned(-0.01))
+
+    def test_is_positive(self):
+        self.assertTrue(Validation.is_positive(0.01))
+        self.assertFalse(Validation.is_positive(0.00))
+
+    def test_argtype_positive_integer(self):
+        with self.assertRaises(ArgumentTypeError):
+            Validation.argtype_positive_integer(0)
+
+        self.assertEqual(1, Validation.argtype_positive_integer(1))
+
+    def argtype_unsigned_integer(self):
+        with self.assertRaises(ArgumentTypeError):
+            Validation.argtype_unsigned_integer(-1)
+
+        self.assertEqual(1, Validation.argtype_unsigned_integer(1))
+
+    def test_argtype_positive_float(self):
+        with self.assertRaises(ArgumentTypeError):
+            Validation.argtype_positive_float(0.00)
+
+        self.assertEqual(1, Validation.argtype_positive_integer(1))
+
+    def argtype_unsigned_float(self):
+        with self.assertRaises(ArgumentTypeError):
+            Validation.argtype_unsigned_integer(-0.01)
+
+        self.assertEqual(0.01, Validation.argtype_unsigned_integer(0.01))
+
 
 if __name__ == '__main__':
-
     unittest.main()
