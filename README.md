@@ -2,3 +2,4 @@
 [![Code Climate](https://codeclimate.com/github/sa2018/csmon/badges/gpa.svg)](https://codeclimate.com/github/sa2018/csmon)
 [![Test Coverage](https://codeclimate.com/github/sa2018/csmon/badges/coverage.svg)](https://codeclimate.com/github/sa2018/csmon/coverage)
 [![Issue Count](https://codeclimate.com/github/sa2018/csmon/badges/issue_count.svg)](https://codeclimate.com/github/sa2018/csmon)
+[![BCH compliance](https://bettercodehub.com/edge/badge/sa2018/csmon?branch=master)](https://bettercodehub.com/)
