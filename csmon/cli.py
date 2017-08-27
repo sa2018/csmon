@@ -35,6 +35,26 @@ if you are providing URLs as arguments""")
 
     args = parser.parse_args()
 
+    # Output params
+    output_grp = arg_grp("Connection options")
+    output_grp_arg = output_grp.add_argument
+
+    output_grp_arg("--monitor-log",
+                   metavar='FILE',
+                   required=False,
+                   default=None,
+                   type=str,
+                   help="[OPTIONAL] Output file to write monitor results.\n"
+                        "[DEFAULT] %s file\n" % None)
+
+    output_grp_arg("--system-log",
+                   metavar='FILE',
+                   required=False,
+                   type=str,
+                   default=None,
+                   help="[OPTIONAL] Output file to write system logs.\n"
+                        "[DEFAULT] %s file\n" % None)
+
     # Extra validation
     urls = args.urls
     file_for_urls = args.url_file
