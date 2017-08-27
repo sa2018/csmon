@@ -1,21 +1,23 @@
- duplication:
+---
+engines:
+  duplication:
     enabled: true
     config:
       languages:
       - python
-
   fixme:
+    enabled: true
+  radon:
     enabled: true
   markdownlint:
     enabled: true
   pep8:
     enabled: true
-
 ratings:
   paths:
-  - "**.inc"
-  - "**.module"
   - "**.py"
+
 exclude_paths:
 - tests/
-- docs/
+- .venv/
+- .cache
