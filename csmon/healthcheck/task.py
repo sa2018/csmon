@@ -60,7 +60,8 @@ class Task(object):
         'nodename nor servname provided, or not known': 'NET_DNS',
         'No route to host': 'NET_ROUTE',
         "ReadTimeoutError": "NET_TIMEOUT",
-        "CertificateError": "NET_SSL_CERT"
+        "CertificateError": "NET_SSL_CERT",
+        "Network is unreachable": "NET_UNREACHABLE"
     }
 
     def __init__(self, lst, i, loggers, run_once=False):
