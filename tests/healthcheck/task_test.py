@@ -89,7 +89,7 @@ class TestTask(unittest.TestCase):
             self.assertEqual(message['retry_count'],"3")
             self.assertTrue(message['finished_ts'].isdigit())
             self.assertEqual(message['response_time_ms'],False)
-            self.assertEqual(message['status_check'],'NET_DNS')
+            self.assertTrue(message['status_check'] in ['NET_DNS','None'])
 
     def test_route_err(self):
         lst = [Host('http://www.google.com:81','<title>Google</title>')]
@@ -107,7 +107,8 @@ class TestTask(unittest.TestCase):
             self.assertEqual(message['retry_count'],"3")
             self.assertTrue(message['finished_ts'].isdigit())
             self.assertEqual(message['response_time_ms'],False)
-            self.assertEqual(message['status_check'],'NET_ROUTE')
+            self.assertTrue(message['status_check'] in ['NET_UNREACHABLE','NET_ROUTE'])
+
 
 if __name__ == '__main__':
     unittest.main()
