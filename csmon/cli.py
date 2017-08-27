@@ -55,6 +55,17 @@ if you are providing URLs as arguments""")
                    help="[OPTIONAL] Output file to write system logs.\n"
                         "[DEFAULT] %s file\n" % None)
 
+     # HTTP Connection params
+    mon_grp = arg_grp("Monitoring options")
+    mon_grp_arg = mon_grp.add_argument
+    mon_grp_arg("--interval",
+                metavar='SECONDS',
+                type=Validation.argtype_positive_integer,
+                default=None,
+                help="[OPTIONAL] How many seconds to wait till reschedule the "
+                     "next test for the each URL\n"
+                     "DEFAULT] %i seconds\n" % 0)
+
     # Extra validation
     urls = args.urls
     file_for_urls = args.url_file
