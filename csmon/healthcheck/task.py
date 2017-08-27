@@ -63,7 +63,7 @@ class Task(object):
         "CertificateError": "NET_SSL_CERT"
     }
 
-    def __init__(self, lst, i, loggers):
+    def __init__(self, lst, i, loggers, run_once=False):
         """
         Initialises the task process and runs forever
         :param lst:
@@ -124,6 +124,9 @@ class Task(object):
 
             lst[i] = host
 
-            loggers['monitor'].info('', extra=host.extra())
+            loggers['monitor'].info(str(host.extra()), extra=host.extra())
 
-            time.sleep(Config.get('CHECK_INTERVAL'))
+            if not run_once:
+                time.sleep(Config.get('CHECK_INTERVAL'))
+            else:
+                break
