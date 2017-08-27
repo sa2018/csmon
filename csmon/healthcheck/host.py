@@ -16,7 +16,8 @@ class Host(object):
                               'response_time': None,
                               'body': None,
                               'response_code_msg': None,
-                              'completed': None
+                              'completed': None,
+                              'prev_response_time': None,
                               }
 
     def __str__(self):
@@ -46,7 +47,20 @@ class Host(object):
         if self.response_code == 200:
 
             if len(self.__contain_text.findall(self.body)) > 0:
-                return 'GREEN'
+                if  self.__last_result['prev_response_time']:
+                    diff = int(self.__last_result['prev_response_time']) - \
+                           int(self.__last_result['response_time'])
+
+                    if diff < 0:
+                        diff = -diff
+                        threshold = diff * 100 / int(self.__last_result[
+                            'prev_response_time'])
+                        if threshold > 10:
+                            return 'ORANGE'
+
+                    return 'GREEN'
+                else:
+                    return 'GREEN'
             else:
                 return '200'
         else:
@@ -74,6 +88,10 @@ class Host(object):
 
     @response_time.setter
     def response_time(self, response_time):
+        if self.__last_result['response_time']:
+            prev =  self.__last_result['response_time']
+            self.__last_result['prev_response_time'] = prev
+
         self.__last_result['response_time'] = response_time
         self.__last_result['completed'] = datetime.utcnow().strftime("%s")
 
