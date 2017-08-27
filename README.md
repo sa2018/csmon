@@ -1,5 +1,8 @@
 # csmon [![Build Status](https://travis-ci.org/sa2018/csmon.svg?branch=master)](https://travis-ci.org/sa2018/csmon) [![Code Climate](https://codeclimate.com/github/sa2018/csmon/badges/gpa.svg)](https://codeclimate.com/github/sa2018/csmon) [![Test Coverage](https://codeclimate.com/github/sa2018/csmon/badges/coverage.svg)](https://codeclimate.com/github/sa2018/csmon/coverage) [![Issue Count](https://codeclimate.com/github/sa2018/csmon/badges/issue_count.svg)](https://codeclimate.com/github/sa2018/csmon) [![BCH compliance](https://bettercodehub.com/edge/badge/sa2018/csmon?branch=master)](https://bettercodehub.com/)
 
+## Description
+CS Monitoring Application can take in an input of URLs and monitors each URL.
+
 ## Install
 
 With [pip](https://pip.pypa.io/en/stable/installing/) installed, run
@@ -61,3 +64,18 @@ Connection options:
                         [DEFAULT] 0.10
 
 ```
+
+## Output
+
+Output format is :
+```
+timestamp_epoch, status_check, url, response_time_ms, try_count
+```
+
+| Status Check  | Reason           |
+| ------------- |:-------------:|
+| Green         | 200 response code and content matched |
+| 200      | 200 response code but content not matched      |
+| 500,502,503,504 | HTTP Errors retryable      |
+| NET_XXX | Network errors , response_time_ms populates False     |
+| Other Response Codes | HTTP Errors not retryable     |
