@@ -23,7 +23,7 @@ class CSMon(object):
         self.loggers = {}
 
         # Assign configuration from arguments
-        config_arg_mapping = {
+        self.config_arg_mapping = {
             'monitor_log': 'LOG_MON_FILE',
             'back_off': 'CHECK_BACK_OFF_FACTOR',
             'system_log': 'LOG_SYS_FILE',
@@ -35,8 +35,8 @@ class CSMon(object):
         args_as_dict = vars(args)
 
         for k in args_as_dict.keys():
-            if k in config_arg_mapping.keys():
-                Config.set(config_arg_mapping[k], args_as_dict[k])
+            if k in self.config_arg_mapping.keys():
+                Config.set(self.config_arg_mapping[k], args_as_dict[k])
 
         self.__init_loggers()
         self.__urls = self.__load_urls()
