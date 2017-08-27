@@ -10,3 +10,7 @@ install:
 
 script:
   - pytest
+  - coverage run -m csmon.cli
+
+after_success:
+  - CODECLIMATE_REPO_TOKEN=a8ca0741806cc58417861626c816bfa223508d9b codeclimate-test-reporter
