@@ -6,7 +6,8 @@ setup(
     version='0.1.0',
 
     description='CS Monitoring Application',
-    long_description="CS Monitoring Application can take in an input of URLs and monitors each URL.",
+    long_description="CS Monitoring Application can take in an input of "
+                     "URLs and monitors each URL.",
     url='https://www.google.com',
     author='sa2018',
     author_email='sa@sa2018.com',
