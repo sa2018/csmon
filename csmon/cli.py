@@ -55,7 +55,7 @@ if you are providing URLs as arguments""")
                    help="[OPTIONAL] Output file to write system logs.\n"
                         "[DEFAULT] %s file\n" % None)
 
-    # HTTP Connection params
+    # Monitoring params
     mon_grp = arg_grp("Monitoring options")
     mon_grp_arg = mon_grp.add_argument
     mon_grp_arg("--interval",
@@ -65,6 +65,34 @@ if you are providing URLs as arguments""")
                 help="[OPTIONAL] How many seconds to wait till reschedule the "
                      "next test for the each URL\n"
                      "DEFAULT] %i seconds\n" % 0)
+
+    # HTTP Connection params
+    http_grp = arg_grp("Connection options")
+    http_grp_arg = http_grp.add_argument
+    http_grp_arg("--retry-count",
+                 metavar='NUMBER',
+                 type=Validation.argtype_unsigned_integer,
+                 default=None,
+                 help="[OPTIONAL] Max retry count if service is unavailable"
+                      "[DEFAULT] %i times" % 0)
+
+    http_grp_arg("--timeout",
+                 metavar='SECONDS',
+                 type=Validation.argtype_positive_float,
+                 default=None,
+                 help="[OPTIONAL] Timeout for the connection\n"
+                      "[DEFAULT] %i seconds" % 0)
+
+    http_grp_arg("--back-off",
+                 metavar='NUMBER',
+                 type=Validation.argtype_unsigned_float,
+                 default=None,
+                 help="[OPTIONAL] A backoff factor to apply between attempts "
+                      "after the second try.\n"
+                      "{backoff factor}*(2 ^ ({number of total retries}-1))\n"
+                      "If the number is 0.1, then it will sleep for "
+                      "[0.0s,0.2s, 0.4s, ...] between retries\n"
+                      "[DEFAULT] %.2f" % 0.00)
 
     # Extra validation
     urls = args.urls
