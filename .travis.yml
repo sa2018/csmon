@@ -1,18 +1,18 @@
 language: python
 python:
-  - "2.7"
-
+- '2.7'
 install:
-  - pip install .
-  - pip install -r requirements.txt
-
+- pip install .
+- pip install -r requirements.txt
 script:
-  - pytest --cov=csmon tests/
-
-secure: "yKXYhvD/9eRUffZoxgkuPowrOtMiycSOzMziUphZ8tWQkpFxeWpyL55n1IuiH99d7qDKEdGt0GdiNw2JPuUpSlWGQwaK1wWw3/UgRL+KXrn5IUA+cSH1p1HyCncCq2g+1GpN8UnFgoGlFq9Ln8rFHjbOA70QKs0qJoRm/gjOHlbbuOxonaCjOD7uInHtd4OEtZjmSxtQSi76myjVGtq8pehsMz1nUMlGo0wbZJ/Gtw4h8JZh+5SKshTp2Fmq9SQjpyCTK7rMip0WQ6e+P0MkaoLi0RP+uNWC53y6YGS+2tjpHmy4O3XGD3SRzxQTGnlV6MMa9PBZQ/SHKbJ7X5ExBehRxPTbR9JFC1NtBXJlxOEK8PFvUVmKaP+LrxsT6u5sEHcx/MnyyAn3ZpqRp57haYShvmFMY2FByRywwdVzw9oAzkWLwYdj8iRbASU6h+VM1qLVxbM34OWweVygnP0T9iPkZDOWIIfvN8UEQC4guWWOOWdMzNyePs6i/gsboqWnc3EuYIaL6FFLzg1HSAM2bPLOh2DIQoR1zotQ2hPvQOwqpZW1WkJBEGnFaI8m05kdSUGCNi6kt4PEpMUOAydXPt1qHlNsn6L0zOHh5On79BfMaenYIVDIiBS6m2sSp78Fs8TLnwLVXiDJiwYDsrzmtQamDBNBtEjscLYRiTtl0no="
+- pytest --cov=csmon tests/
 
 after_success:
-  - CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN codeclimate-test-reporter
-  - "curl -o /tmp/travis-automerge https://raw.githubusercontent.com/cdown/travis-automerge/master/travis-automerge"
-  - "chmod a+x /tmp/travis-automerge"
-  - "BRANCHES_TO_MERGE_REGEX='^development' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=sa2018/csmon /tmp/travis-automerge"
+- CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN codeclimate-test-reporter
+- curl -o /tmp/travis-automerge https://raw.githubusercontent.com/cdown/travis-automerge/master/travis-automerge
+- chmod a+x /tmp/travis-automerge
+- BRANCHES_TO_MERGE_REGEX='^development' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=sa2018/csmon
+  /tmp/travis-automerge
+env:
+  global:
+    secure: B3ctFtZIf+CVMxqN852s2h9qKs5dYCeX3qYI46DZavcg5fN/U5nnjWk8BRTLJ1oFDlnZJwDx6rjrptXiQukC2LFi/aExQ98MlJ0dFUMnIgZ6NliGL62dLTgML5UJRHQYAD/URYosIyiKvb/uWciGxBpaxm8ogvYfKJn7M7TeMim/PxIEB+n/m/lsE7D5D/O8v7/ci02vnBJEXaeYdkF8jkTAyAxHf0t2jnsLrRGg/9vPgr2F95mHiqb/B7Gr4q4xGQIzoT4G8214XXT/594AnjW/RlH3FdbJgH04DRbFpWb/Lazbxgq/GsaUOXT3WQ6ef/fTNn3wn2RnOhzHavteh8LCz4ajkSkoMAASI7vqCtUiUqDEORj+0qt/HUJ3U0h4nJDkJ0K5rYH1vcE+7tAy7LteudmOiUFq0fGDntYB/CGmMHc9mQFBiS/LlRhPwHkOZOKZKu2Jmg/avCYQOYBLZ1O/JSpD/3Ao8y7tYyYSXiwv/QYs9sumXPQ8hu2ClCzz4kqfZKqnPsE7/mpWzV/Dki5jl7RmB9csF8hVEM6q7fabOBgMBnhAuDWKqbRiImPNBeV9ZOKBuVYr9Qp8gKBKG2EPRaY3GLVMYD2wbTvFsEsfeJ8Ho+XzpS1hWuy+VTnUwo5b3KzB6TY43+v5PNn9ScwE98iZuxs/Du20BL9HkEA=
