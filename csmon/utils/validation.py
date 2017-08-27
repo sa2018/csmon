@@ -33,6 +33,22 @@ class Validation(object):
         return True
 
     @staticmethod
+    def is_number(value):
+        return Validation.__is(value,complex)
+
+    @staticmethod
+    def is_integer(value):
+        return Validation.__is(value, int)
+
+    @staticmethod
+    def is_unsigned(value):
+        return True if float(value) >= 0 else False
+
+    @staticmethod
+    def is_positive(value):
+        return True if float(value) >= 0.01 else False
+
+    @staticmethod
     def __file_(file_name, ok_status):
         return True if os.path.isfile(file_name) and \
                        os.access(file_name, ok_status) else False
@@ -70,3 +86,13 @@ class Validation(object):
             error="File %s does not exists/readable or empty"
                   % file_name)
         return file_name
+
+    @staticmethod
+    def argtype_positive_integer(value):
+        Validation.__argtype_check(
+            value=value,
+            validators=[Validation.is_integer, Validation.is_positive],
+            error="%s is an invalid positive integer value, expected n > 1"
+                  % value)
+
+        return int(value)
