@@ -1,5 +1,6 @@
 from argparse import ArgumentTypeError
 import os
+from urlparse import urlsplit
 
 
 class Validation(object):
@@ -122,8 +123,18 @@ class Validation(object):
 
         Validation.__argtype_check(
             value=value,
-            validators=[Validation.is_number, Validation.__is_unsigned],
+            validators=[Validation.is_number, Validation.is_unsigned],
             error="%s is an invalid unsigned float value, expected n >= 0.00"
                   % value)
 
         return float(value)
+
+    @staticmethod
+    def url(url):
+        Validation.instance(url, str)
+
+        scheme, netloc, path, query, fragment = urlsplit(url)
+
+        return True if scheme in ('http', 'https') and \
+                       scheme and \
+                       netloc else False
