@@ -9,5 +9,10 @@ install:
 script:
   - pytest --cov=csmon tests/
 
+secure: "yKXYhvD/9eRUffZoxgkuPowrOtMiycSOzMziUphZ8tWQkpFxeWpyL55n1IuiH99d7qDKEdGt0GdiNw2JPuUpSlWGQwaK1wWw3/UgRL+KXrn5IUA+cSH1p1HyCncCq2g+1GpN8UnFgoGlFq9Ln8rFHjbOA70QKs0qJoRm/gjOHlbbuOxonaCjOD7uInHtd4OEtZjmSxtQSi76myjVGtq8pehsMz1nUMlGo0wbZJ/Gtw4h8JZh+5SKshTp2Fmq9SQjpyCTK7rMip0WQ6e+P0MkaoLi0RP+uNWC53y6YGS+2tjpHmy4O3XGD3SRzxQTGnlV6MMa9PBZQ/SHKbJ7X5ExBehRxPTbR9JFC1NtBXJlxOEK8PFvUVmKaP+LrxsT6u5sEHcx/MnyyAn3ZpqRp57haYShvmFMY2FByRywwdVzw9oAzkWLwYdj8iRbASU6h+VM1qLVxbM34OWweVygnP0T9iPkZDOWIIfvN8UEQC4guWWOOWdMzNyePs6i/gsboqWnc3EuYIaL6FFLzg1HSAM2bPLOh2DIQoR1zotQ2hPvQOwqpZW1WkJBEGnFaI8m05kdSUGCNi6kt4PEpMUOAydXPt1qHlNsn6L0zOHh5On79BfMaenYIVDIiBS6m2sSp78Fs8TLnwLVXiDJiwYDsrzmtQamDBNBtEjscLYRiTtl0no="
+
 after_success:
-  - CODECLIMATE_REPO_TOKEN=5c7dbe2c9715eab293d17b3a3dd65709f24b0e9330aee8505ef0d6e96dfa8756 codeclimate-test-reporter
+  - CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN codeclimate-test-reporter
+  - "curl -o /tmp/travis-automerge https://raw.githubusercontent.com/cdown/travis-automerge/master/travis-automerge"
+  - "chmod a+x /tmp/travis-automerge"
+  - "BRANCHES_TO_MERGE_REGEX='^development/' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=cdown/srt /tmp/travis-automerge"
