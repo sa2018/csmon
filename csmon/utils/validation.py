@@ -5,6 +5,16 @@ import os
 class Validation(object):
 
     @staticmethod
+    def instance(obj, instance, exception=False):
+        if not isinstance(obj, instance):
+            if exception:
+                raise TypeError("%s expected given %s" % (instance, type(obj)))
+
+            return False
+
+        return True
+
+    @staticmethod
     def __argtype_check(value, validators, error):
 
         for item in validators:
@@ -29,31 +39,34 @@ class Validation(object):
 
     @staticmethod
     def file_not_empty(file_name):
-        return os.stat(file_name).st_size > 0
+        Validation.instance(file_name, str)
 
+        return os.stat(file_name).st_size > 0
 
     @staticmethod
     def file_exists_and_not_empty(file_name):
+        Validation.instance(file_name, str)
+
         return True if Validation.file_read(file_name) \
                        and Validation.file_not_empty(file_name) else False
 
     @staticmethod
     def file_read(file_name):
-
         Validation.instance(file_name, str)
         return Validation.__file_(file_name, os.R_OK)
 
     @staticmethod
     def file_write(file_name):
-
         Validation.instance(file_name, str)
         return Validation.__file_(file_name, os.W_OK)
 
     @staticmethod
-    def argtype_file_exists_and_not_empty(value):
+    def argtype_file_exists_and_not_empty(file_name):
+        Validation.instance(file_name, str)
+
         Validation.__argtype_check(
-            value=value,
-            validators=[Validation.file_exists_and_not_empty()],
-            error="File does not exists/readable or empty"
-                  % value)
-        return value
+            value=file_name,
+            validators=[Validation.file_exists_and_not_empty],
+            error="File %s does not exists/readable or empty"
+                  % file_name)
+        return file_name
