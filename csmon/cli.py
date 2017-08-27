@@ -33,5 +33,14 @@ if you are providing URLs as arguments""")
                   type=Validation.argtype_file_exists_and_not_empty,
                   help="\nURLs from file to monitor")
 
+    args = parser.parse_args()
+
+    # Extra validation
+    urls = args.urls
+    file_for_urls = args.url_file
+
+    if (not urls and not file_for_urls) or (urls and file_for_urls):
+        parser.error('--urls or --url-file required')
+
 if __name__ == '__main__':
     run()
