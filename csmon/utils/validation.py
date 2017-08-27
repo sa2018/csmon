@@ -96,3 +96,34 @@ class Validation(object):
                   % value)
 
         return int(value)
+
+    @staticmethod
+    def argtype_unsigned_integer(value):
+        Validation.__argtype_check(
+            value=value,
+            validators=[Validation.is_integer, Validation.is_unsigned],
+            error="%s is an invalid unsigned integer value, expected n >= 0"
+                  % value)
+
+        return int(value)
+
+    @staticmethod
+    def argtype_positive_float(value):
+        Validation.__argtype_check(
+            value=value,
+            validators=[Validation.is_number, Validation.is_positive],
+            error="%s is an invalid positive float value, expected n > 0.01"
+                  % value)
+
+        return float(value)
+
+    @staticmethod
+    def argtype_unsigned_float(value):
+
+        Validation.__argtype_check(
+            value=value,
+            validators=[Validation.is_number, Validation.__is_unsigned],
+            error="%s is an invalid unsigned float value, expected n >= 0.00"
+                  % value)
+
+        return float(value)
