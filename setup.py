@@ -33,7 +33,7 @@ setup(
 
     entry_points={
         'console_scripts': [
-            'csmon=csmon.cli:run',
+            'csmon=csmon.cli:Cli',
 
         ],
     },
