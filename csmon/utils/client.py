@@ -6,7 +6,11 @@ from config import Config
 
 class Client(object):
 
-    def __init__(self, url):
+    def __init__(self, url=None):
+
+        if not url:
+            raise ValueError("URL is missing")
+
         self.__url = url
         self.__session = requests.Session()
         retries = Retry(total=Config.get('CHECK_CONN_MAX_RETRY'),
